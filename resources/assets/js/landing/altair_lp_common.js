@@ -1,11 +1,7 @@
 
 // variables
 var $body = $('body'),
-    $html = $('html'),
-    $window = $(window),
-    $document = $(document),
-    $header_main = $('#header_main'),
-    header_main_height = $header_main.height(),
+    header_main_height = $('#header_main').height(),
     easing_swiftOut = [ 0.35,0,0.25,1 ];
     bez_easing_swiftOut = $.bez(easing_swiftOut);
 
@@ -19,7 +15,7 @@ $(function() {
 
 });
 
-$window.on('load',function () {
+$(window).on('load',function () {
     // hi-res images
     $('img').dense({
         glue: "@"
@@ -29,13 +25,16 @@ $window.on('load',function () {
 });
 
 altair_header_main = {
+
     init: function () {
+
         // sticky header
         altair_header_main.sticky_header();
         // main navigation
         altair_header_main.main_navigation();
     },
     sticky_header: function () {
+        var $body = $('body')
         $body.addClass('header_sticky');
         $(window).on("scroll touchmove", function () {
             $body.toggleClass('header_shadow', $(document).scrollTop() > 0);
@@ -97,7 +96,7 @@ altair_md = {
 
                 altair_md.update_input($this);
             }
-            $body
+            $('body')
                 .on('focus', '.md-input', function() {
                     $(this).closest('.md-input-wrapper').addClass('md-input-focus')
                 })

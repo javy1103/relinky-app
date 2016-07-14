@@ -2,11 +2,8 @@
 
 @section('head')
         <title>Relinky</title>
-        <script src="/js/landing/common.js"></script>
-        <script src="/js/landing/uikit_custom.js"></script>
-        <script src="/js/landing/altair_lp_common.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/js/uikit.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.4/css/uikit.min.css">
+        <script src="/js/landing.js"></script>
+        <link href="/css/uikit-flat.css" rel="stylesheet" type="text/css">
         <link href="/css/main.css" rel="stylesheet" type="text/css">
 
 @endsection
