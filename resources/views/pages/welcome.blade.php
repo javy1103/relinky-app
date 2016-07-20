@@ -1,11 +1,9 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('head')
         <title>Relinky</title>
-        <script src="/js/landing.js"></script>
-        <link href="/css/uikit-flat.css" rel="stylesheet" type="text/css">
-        <link href="/css/main.css" rel="stylesheet" type="text/css">
-
+        <script src="/js/landing/landing.js"></script>
+        <link href="/css/landing/main.css" rel="stylesheet" type="text/css">
 @endsection
 
 @section('content')
