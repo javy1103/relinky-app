@@ -19,17 +19,18 @@
                 <div class="login_heading">
                     <div class="user_avatar"></div>
                 </div>
-                <form>
+                <form role="form" method="POST" action="{{ url('/login') }}">
+                       {{ csrf_field() }}
                     <div class="uk-form-row">
-                        <label for="login_username">Username</label>
-                        <input class="md-input" type="text" id="login_username" name="login_username" />
+                        <label for="email">Email</label>
+                        <input class="md-input" id="email" type="email" name="email" value="{{ old('email') }}" />
                     </div>
                     <div class="uk-form-row">
                         <label for="login_password">Password</label>
-                        <input class="md-input" type="password" id="login_password" name="login_username" />
+                        <input class="md-input" type="password" id="login_password" name="password" />
                     </div>
                     <div class="uk-margin-medium-top">
-                        <a href="index.html" class="md-btn md-btn-primary md-btn-block md-btn-large">Sign In</a>
+                        <button type="submit" class="md-btn md-btn-primary md-btn-block md-btn-large">Sign In</button>
                     </div>
                     <div class="uk-grid uk-grid-width-1-3 uk-grid-small uk-margin-top">
                         <div><a href="#" class="md-btn md-btn-block md-btn-facebook" data-uk-tooltip="{pos:'bottom'}" title="Sign in with Facebook"><i class="uk-icon-facebook uk-margin-remove"></i></a></div>
