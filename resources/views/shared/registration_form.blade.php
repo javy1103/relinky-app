@@ -3,6 +3,13 @@
     <form method="POST" action="{{ url('/register') }}">
         {{ csrf_field() }}
         <div class="uk-form-row">
+            <label for="name">Name</label>
+            <input class="md-input {{ $errors->has('name') ? 'md-input-danger' : '' }}" type="text" id="name" name="name" value="{{ old('name') }}" />
+            @if ($errors->has('name'))
+                <div class="parsley-errors-list filled"><span class="parsley-required">{{ $errors->first('name') }}</span></div>
+            @endif
+        </div>
+        <div class="uk-form-row">
             <label for="username">Username</label>
             <input class="md-input {{ $errors->has('username') ? 'md-input-danger' : '' }}" type="text" id="username" name="username" value="{{ old('username') }}" />
             @if ($errors->has('username'))
