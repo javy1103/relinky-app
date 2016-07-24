@@ -6205,6 +6205,7 @@ textarea.no_autosize {
   width: 500px;
 }
 .md-input-wrapper > label {
+  text-transform: capitalize;
   color: #727272;
   position: absolute;
   top: 16px;
