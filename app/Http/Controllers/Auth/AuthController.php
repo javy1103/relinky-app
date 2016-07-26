@@ -78,7 +78,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        $profile = 'App\\'.$data['profile_type'];
+        $profile = isset($data['profile_type']) ? 'App\Agent' : 'App\Member';
         $profile = $profile::create();
         $profile->user()->create([
             'name' => $data['name'],
