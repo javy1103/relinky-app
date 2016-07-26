@@ -15,8 +15,7 @@
         <link href="/css/uikit-flat.css" rel="stylesheet" type="text/css">
         <script src="/js/dashboard/dashboard.js"></script>
         <link href="/css/dashboard/main.css" rel="stylesheet" type="text/css">
-        <!--  dashbord functions -->
-        <script src="js/dashboard/pages/dashboard.min.js"></script>
+        @yield('head')
 
 
 </head>

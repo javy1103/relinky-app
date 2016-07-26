@@ -3,9 +3,15 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Auth;
 
 class User extends Authenticatable
 {
+
+    //check if is current user
+    public function isCurrentUser() {
+        return ( Auth::user() && Auth::user()->id == $this->id ) ? true : false ;
+    }
 
     //Getting editable attributes
     public static function getAttrs() {
