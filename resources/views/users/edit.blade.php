@@ -15,6 +15,7 @@
 <div id="page_content_inner">
     <div id="page_content_inner">
         <form action="" class="uk-form-stacked" id="user_edit_form">
+            {{ csrf_field() }}
             <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-large-7-10">
                     <div class="md-card">
@@ -60,7 +61,7 @@
                                         <div class="uk-grid" data-uk-grid-margin>
                                             <div class="uk-width-medium-1-2">
                                                 <label for="user_edit_uname_control">User name</label>
-                                                <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" />
+                                                <input class="md-input" type="text" id="user_edit_uname_control" name="name" />
                                             </div>
                                             <div class="uk-width-medium-1-2">
                                                 <label for="user_edit_position_control">User position</label>
@@ -97,7 +98,7 @@
                                                                 <i class="md-list-addon-icon material-icons">&#xE158;</i>
                                                             </span>
                                                             <label>Email</label>
-                                                            <input type="text" class="md-input" name="user_edit_email" value="frami.zula@hillsklein.net" />
+                                                            <input type="text" class="md-input" name="email" value="{{ old('email') }}" />
                                                         </div>
                                                     </div>
                                                     <div>

@@ -25,7 +25,7 @@ altair_user_edit = {
     edit_form: function() {
         // form variables
         var $user_edit_form = $('#user_edit_form'),
-            $user_edit_submit_btn = $('#user_edit_submit'),
+            $user_edit_submit_btn = $('#user_edit_save'),
             user_name = $('#user_edit_uname'),
             user_name_control= $('#user_edit_uname_control'),
             user_position = $('#user_edit_position'),
@@ -55,8 +55,18 @@ altair_user_edit = {
         // submit form
         $user_edit_submit_btn.on('click',function(e) {
             e.preventDefault();
-            var form_serialized = JSON.stringify( $user_edit_form.serializeObject(), null, 2 );
+            var form_serialized = $user_edit_form.serializeObject()
             UIkit.modal.alert('<p>User data:</p><pre>' + form_serialized + '</pre>');
+            $.ajax({
+                type: 'PUT',
+                url: '/users/javy1103',
+                dataType: 'json',
+                data: form_serialized,
+                headers: { 'X-CSRF-TOKEN': token = $('[name="_token"]').val() },
+                success: function(data) {
+                    UIkit.modal.alert('<p>User data:</p><pre>' + data + '</pre>');
+                }
+            })
         })
     },
     user_languages: function() {

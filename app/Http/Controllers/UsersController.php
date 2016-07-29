@@ -51,9 +51,11 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $username)
+    public function update(Request $request)
     {
-        //
+        $user = Auth::user();
+        $user->update($request->all());
+        return response()->json(['user' => $user])->header('Status', 202);
     }
 
     /**
