@@ -14,10 +14,10 @@ class CreateMembersTable extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('bio');
-            $table->string('profile_img');
-            $table->string('phone');
-            $table->string('city');
+            $table->string('bio')->nullable();
+            $table->string('profile_img')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('city')->nullable();
             $table->timestamps();
         });
     }

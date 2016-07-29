@@ -78,6 +78,10 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+
+        $username = $data['username'];
+        $this->redirectTo = route('users.edit', ['username' => $username]);
+
         $profile = isset($data['profile_type']) ? 'App\Agent' : 'App\Member';
         $profile = $profile::create();
         $profile->user()->create([
