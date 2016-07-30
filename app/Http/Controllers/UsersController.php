@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\User;
+use Auth;
 
 class UsersController extends Controller
 {
@@ -27,9 +28,8 @@ class UsersController extends Controller
      */
     public function show($username)
     {
-        $user = User::whereUsername($username)->with('profile')->get();
-        // return $user;
-        return view('users.show');
+        $user = User::whereUsername($username)->with('profile')->firstOrFail();
+        return view('users.show')->with('user', $user);
     }
 
     /**
@@ -40,7 +40,8 @@ class UsersController extends Controller
      */
     public function edit($username)
     {
-        //
+        $user = Auth::user();
+        return view('users.edit')->with('user', $user);
     }
 
     /**
@@ -50,9 +51,11 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $username)
+    public function update(Request $request)
     {
-        //
+        $user = Auth::user();
+        $user->update($request->all());
+        return response()->json(['user' => $user])->header('Status', 202);
     }
 
     /**

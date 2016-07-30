@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->morphs('profile');
             $table->index('email');
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

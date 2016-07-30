@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="user_heading_content">
-                        <h2 class="heading_b uk-margin-bottom"><span class="uk-text-truncate">Nina Von</span><span class="sub-heading">Land acquisition specialist</span></h2>
+                        <h2 class="heading_b uk-margin-bottom"><span class="uk-text-truncate">{{$user->name}}</span><span class="sub-heading">{{$user->profile->specialties}}</span></h2>
                         <ul class="user_stats">
                             <li>
                                 <h4 class="heading_a">2391 <span class="sub-heading">Posts</span></h4>
@@ -34,9 +34,11 @@
                             </li>
                         </ul>
                     </div>
-                    <a class="md-fab md-fab-small md-fab-accent" href="page_user_edit.html">
-                        <i class="material-icons">&#xE150;</i>
-                    </a>
+                    @if( $user->isCurrentUser() )
+                        <a class="md-fab md-fab-small md-fab-accent" href="{{action('UsersController@edit', ['username' => Auth::user()->username ])}}">
+                            <i class="material-icons">&#xE150;</i>
+                        </a>
+                    @endif
                 </div>
                 <div class="user_content">
                     <ul id="user_profile_tabs" class="uk-tab" data-uk-tab="{connect:'#user_profile_tabs_content', animation:'slide-horizontal'}" data-uk-sticky="{ top: 48, media: 960 }">

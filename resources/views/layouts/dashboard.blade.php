@@ -15,8 +15,7 @@
         <link href="/css/uikit-flat.css" rel="stylesheet" type="text/css">
         <script src="/js/dashboard/dashboard.js"></script>
         <link href="/css/dashboard/main.css" rel="stylesheet" type="text/css">
-        <!--  dashbord functions -->
-        <script src="js/dashboard/pages/dashboard.min.js"></script>
+        @yield('head')
 
 
 </head>
@@ -197,7 +196,7 @@
                                 <a href="#" class="user_action_image"><img class="md-user-image" src="img/avatars/avatar_11_tn.png" alt=""/></a>
                                 <div class="uk-dropdown uk-dropdown-small">
                                     <ul class="uk-nav js-uk-prevent">
-                                        <li><a href="page_user_profile.html">My profile</a></li>
+                                        <li><a href="{{ route('users.show', [ 'username' => Auth::user()->username ]) }}">My profile</a></li>
                                         <li><a href="page_settings.html">Settings</a></li>
                                         <li><a href="{{ url('/logout') }}">Logout</a></li>
                                     </ul>
