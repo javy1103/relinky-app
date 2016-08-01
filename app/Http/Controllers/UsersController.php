@@ -89,10 +89,10 @@ class UsersController extends Controller
     protected function validator($request)
     {
         return Validator::make($request, [
-            'name' => 'required|min:3|max:255',
-            'username' => 'min:6|unique:users',
-            'email' => 'email|min:3|max:255|unique:users',
-            'password' => 'min:6',
+            'name' => 'sometimes|required|min:3|max:255',
+            'username' => 'sometimes|require|min:6|unique:users',
+            'email' => 'sometimes|email|min:3|max:255|unique:users',
+            'password' => 'sometimes|require|min:6',
         ]);
     }
 
