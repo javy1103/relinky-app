@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 use Auth;
+use Validator;
 
 class UsersController extends Controller
 {
@@ -53,9 +54,19 @@ class UsersController extends Controller
      */
     public function update(Request $request)
     {
-        $user = Auth::user();
-        $user->update($request->all());
-        return response()->json(['user' => $user])->header('Status', 202);
+        if( isset( $request->isActive ) ) {
+            $this->toggleAcct( $request->isActive );
+        }
+
+        $validator = $this->validator( $request->all() );
+
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 200);
+        }
+
+        Auth::user()->update($request->all());
+
+        return response()->json( ['message' => "Account successfully updated."], 200 );
     }
 
     /**
@@ -68,4 +79,28 @@ class UsersController extends Controller
     {
         //
     }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator($request)
+    {
+        return Validator::make($request, [
+            'name' => 'required|min:3|max:255',
+            'username' => 'min:6|unique:users',
+            'email' => 'email|min:3|max:255|unique:users',
+            'password' => 'min:6',
+        ]);
+    }
+
+    protected function toggleAcct($input) {
+        $message = (Auth::user()->toggleAcct($input))
+            ? "Account successfully updated."
+                : "There was a problem while updating your account.";
+        return response()->json( ['message' => $message], 200);
+    }
+
 }

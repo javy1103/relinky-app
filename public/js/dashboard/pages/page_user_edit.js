@@ -23,13 +23,34 @@ altair_user_edit = {
         altair_user_edit.user_todo();
     },
     edit_form: function() {
+
+        $.ajaxSetup({
+            headers: { 'X-CSRF-TOKEN': token = $('[name="_token"]').val() },
+        })
+
         // form variables
         var $user_edit_form = $('#user_edit_form'),
             $user_edit_submit_btn = $('#user_edit_save'),
             user_name = $('#user_edit_uname'),
             user_name_control= $('#user_edit_uname_control'),
             user_position = $('#user_edit_position'),
-            user_position_control = $('#user_edit_position_control');
+            user_position_control = $('#user_edit_position_control'),
+            user_edit_active = $('#user_edit_active')
+
+        user_edit_active.on('change', function(){
+            $.ajax({
+                type: 'PUT',
+                url: '/users/javy1103',
+                dataType: 'json',
+                data: { isActive: user_edit_active.is(':checked') },
+                success: function(data) {
+                    UIkit.notify({
+                        message: data.message,
+                        status: 'success'
+                    });
+                }
+            })
+        })
 
         user_name_control
             // insert user name into form input
@@ -56,15 +77,16 @@ altair_user_edit = {
         $user_edit_submit_btn.on('click',function(e) {
             e.preventDefault();
             var form_serialized = $user_edit_form.serializeObject()
-            UIkit.modal.alert('<p>User data:</p><pre>' + form_serialized + '</pre>');
             $.ajax({
                 type: 'PUT',
                 url: '/users/javy1103',
                 dataType: 'json',
                 data: form_serialized,
-                headers: { 'X-CSRF-TOKEN': token = $('[name="_token"]').val() },
                 success: function(data) {
-                    UIkit.modal.alert('<p>User data:</p><pre>' + data + '</pre>');
+                    UIkit.notify({
+                        message: data.message,
+                        status: 'success'
+                    });
                 }
             })
         })
