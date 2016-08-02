@@ -35,7 +35,7 @@
                                     </div>
                                 </div>
                                 <div class="user_heading_content">
-                                    <h2 class="heading_b"><span class="uk-text-truncate" id="user_edit_uname">{{ $user->name }}</span><span class="sub-heading" id="user_edit_position">Land acquisition specialist</span></h2>
+                                    <h2 class="heading_b"><span class="uk-text-truncate">{{ $user->name }}</span><span class="sub-heading">Land acquisition specialist</span></h2>
                                 </div>
                                 <div class="md-fab-wrapper">
                                     <div class="md-fab md-fab-toolbar md-fab-small md-fab-accent">
@@ -60,18 +60,20 @@
                                             </h3>
                                             <div class="uk-grid" data-uk-grid-margin>
                                                 <div class="uk-width-medium-1-2">
-                                                    <label for="user_edit_uname_control">User name</label>
-                                                    <input class="md-input" type="text" id="user_edit_uname_control" name="name" />
+                                                    <label for="user_edit_name">Name</label>
+                                                    <input class="md-input" type="text" id="user_edit_name" name="name" value="{{ $user->name }}"/>
                                                 </div>
                                                 <div class="uk-width-medium-1-2">
-                                                    <label for="user_edit_position_control">User position</label>
-                                                    <input class="md-input" type="text" id="user_edit_position_control" name="user_edit_position_control" />
+                                                    <label for="user_edit_email">Email</label>
+                                                    <input class="md-input" type="email" id="user_edit_email" name="email" value="{{ $user->email }}"/>
                                                 </div>
-                                            </div>
-                                            <div class="uk-grid">
-                                                <div class="uk-width-1-1">
-                                                    <label for="user_edit_personal_info_control">About</label>
-                                                    <textarea class="md-input" name="user_edit_personal_info_control" id="user_edit_personal_info_control" cols="30" rows="4">Repellat amet voluptas fugit doloremque reiciendis repellat praesentium quidem et eum aut voluptatem hic aut laborum ullam ipsam dicta quo ad quae beatae eius voluptas sequi voluptatem reiciendis quam omnis officia deserunt nostrum cupiditate corrupti doloribus quos eos temporibus et et enim qui quae omnis.</textarea>
+                                                <div class="uk-width-medium-1-2">
+                                                    <label for="user_edit_password">New Password</label>
+                                                    <input class="md-input" type="password" id="user_edit_password" name="password"/>
+                                                </div>
+                                                <div class="uk-width-medium-1-2">
+                                                    <label for="user_edit_password_confirmation">New Password Confirmation</label>
+                                                    <input class="md-input" type="password" id="user_edit_password_confirmation" name="password_confirmation"/>
                                                 </div>
                                             </div>
                                             <h3 class="full_width_in_card heading_c">
@@ -80,9 +82,6 @@
                                             <div class="uk-grid" data-uk-grid-margin>
                                                 <div class="uk-width-1-1">
                                                     <select id="user_edit_languages" name="user_edit_languages" multiple>
-                                                        <option value="gb" selected>English</option>
-                                                        <option value="pl" selected>Polish</option>
-                                                        <option value="fr" selected>French</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -92,15 +91,6 @@
                                             <div class="uk-grid">
                                                 <div class="uk-width-1-1">
                                                     <div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-2" data-uk-grid-margin>
-                                                        <div>
-                                                            <div class="uk-input-group">
-                                                                <span class="uk-input-group-addon">
-                                                                    <i class="md-list-addon-icon material-icons">&#xE158;</i>
-                                                                </span>
-                                                                <label>Email</label>
-                                                                <input type="text" class="md-input" name="email" value="{{ old('email') }}" />
-                                                            </div>
-                                                        </div>
                                                         <div>
                                                             <div class="uk-input-group">
                                                                 <span class="uk-input-group-addon">

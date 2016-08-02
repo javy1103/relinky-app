@@ -90,9 +90,9 @@ class UsersController extends Controller
     {
         return Validator::make($request, [
             'name' => 'sometimes|required|min:3|max:255',
-            'username' => 'sometimes|require|min:6|unique:users',
-            'email' => 'sometimes|email|min:3|max:255|unique:users',
-            'password' => 'sometimes|require|min:6',
+            'username' => 'sometimes|required|min:6|unique:users,username,'.Auth::user()->id,
+            'email' => 'sometimes|required|email|min:3|max:255|unique:users,email,'.Auth::user()->id,
+            'password' => 'sometimes|required|min:6',
         ]);
     }
 

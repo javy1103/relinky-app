@@ -30,12 +30,12 @@ altair_user_edit = {
 
         // form variables
         var $user_edit_form = $('#user_edit_form'),
-            $user_edit_submit_btn = $('#user_edit_save'),
-            user_name = $('#user_edit_uname'),
-            user_name_control= $('#user_edit_uname_control'),
-            user_position = $('#user_edit_position'),
-            user_position_control = $('#user_edit_position_control'),
-            user_edit_active = $('#user_edit_active')
+        $user_edit_submit_btn = $('#user_edit_save'),
+        user_edit_name = $('#user_edit_name'),
+        user_edit_email = $('#user_edit_email'),
+        user_edit_active = $('#user_edit_active'),
+        user_edit_password = $('#user_edit_password'),
+        user_edit_password_confirmation = $('#user_edit_password_confirmation')
 
         user_edit_active.on('change', function(){
             $.ajax({
@@ -52,26 +52,14 @@ altair_user_edit = {
             })
         })
 
-        user_name_control
-            // insert user name into form input
-            .val(user_name.text())
-            // change user name on keyup
-            .on('keyup',function() {
-                user_name.text(user_name_control.val())
-            });
         // update inputs
-        altair_md.update_input(user_name_control);
-
-
-        user_position_control
-            // insert user position into form input
-            .val(user_position.text())
-            // change user position on keyup
-            .on('keyup',function() {
-                user_position.text(user_position_control.val())
-            });
+        altair_md.update_input(user_edit_name);
         // update inputs
-        altair_md.update_input(user_position_control);
+        altair_md.update_input(user_edit_email);
+        // update inputs
+        altair_md.update_input(user_edit_password);
+        // update inputs
+        altair_md.update_input(user_edit_password_confirmation);
 
         // submit form
         $user_edit_submit_btn.on('click',function(e) {
@@ -91,13 +79,7 @@ altair_user_edit = {
             })
         })
     },
-    user_languages: function() {
-
-      var languages
-
-      $.getJSON('/languages', function(data) {
-        languages = data
-      })
+    user_languages: function(languages) {
 
         $('#user_edit_languages').selectize({
             plugins: {
@@ -110,13 +92,20 @@ altair_user_edit = {
             render: {
                 option: function(data, escape) {
                     return  '<div class="option">' +
-                        '<i class="item-icon flag-' + escape(data.value).toUpperCase() + '"></i>' +
-                        '<span>' + escape(data.title) + '</span>' +
-                        '</div>';
+                    '<i class="item-icon flag-' + escape(data.value).toUpperCase() + '"></i>' +
+                    '<span>' + escape(data.title) + '</span>' +
+                    '</div>';
                 },
                 item: function(data, escape) {
                     return '<div class="item"><i class="item-icon flag-' + escape(data.value).toUpperCase() + '"></i>' + escape(data.title) + '</div>';
                 }
+            },
+            load: function(query, callback) {
+                if (!query.length) return callback();
+                $.getJSON('/languages')
+                .done(function(data){
+                    callback(data)
+                })
             },
             maxItems: null,
             valueField: 'value',
@@ -125,37 +114,37 @@ altair_user_edit = {
             create: false,
             onDropdownOpen: function($dropdown) {
                 $dropdown
-                    .hide()
-                    .velocity('slideDown', {
-                        begin: function() {
-                            $dropdown.css({'margin-top':'0'})
-                        },
-                        duration: 200,
-                        easing: easing_swiftOut
-                    })
+                .hide()
+                .velocity('slideDown', {
+                    begin: function() {
+                        $dropdown.css({'margin-top':'0'})
+                    },
+                    duration: 200,
+                    easing: easing_swiftOut
+                })
             },
             onDropdownClose: function($dropdown) {
                 $dropdown
-                    .show()
-                    .velocity('slideUp', {
-                        complete: function() {
-                            $dropdown.css({'margin-top':''})
-                        },
-                        duration: 200,
-                        easing: easing_swiftOut
-                    })
+                .show()
+                .velocity('slideUp', {
+                    complete: function() {
+                        $dropdown.css({'margin-top':''})
+                    },
+                    duration: 200,
+                    easing: easing_swiftOut
+                })
             }
         });
     },
     user_groups: function() {
 
         var $user_groups = $('#user_groups'),
-            $all_groups = $('#all_groups'),
-            $user_groups_control = $('#user_groups_control'),
-            serialize_user_group = function() {
-                var serialized_data = $user_groups.data("sortable").serialize();
-                $user_groups_control.val( JSON.stringify(serialized_data) );
-            };
+        $all_groups = $('#all_groups'),
+        $user_groups_control = $('#user_groups_control'),
+        serialize_user_group = function() {
+            var serialized_data = $user_groups.data("sortable").serialize();
+            $user_groups_control.val( JSON.stringify(serialized_data) );
+        };
 
 
         var sortable_user_groups = UIkit.sortable($user_groups, {
@@ -180,11 +169,11 @@ altair_user_edit = {
     user_todo: function() {
         var $user_todo = $('#user_todo');
         $user_todo.find('input:checkbox')
-            .on('ifChecked', function(){
-                $(this).closest('li').addClass('md-list-item-disabled');
-            })
-            .on('ifUnchecked', function(){
-                $(this).closest('li').removeClass('md-list-item-disabled');
-            });
+        .on('ifChecked', function(){
+            $(this).closest('li').addClass('md-list-item-disabled');
+        })
+        .on('ifUnchecked', function(){
+            $(this).closest('li').removeClass('md-list-item-disabled');
+        });
     }
 };
