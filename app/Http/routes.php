@@ -20,3 +20,7 @@ Route::auth();
 Route::get('/dashboard', 'HomeController@dashboard');
 
 Route::resource('users', 'UsersController', ['except' => [ 'create', 'store' ], 'parameters' => [ 'users' => 'username' ]]);
+
+Route::get('/languages', function(App\Language $language) {
+  return response($language->all()->toJson(), 200);
+});

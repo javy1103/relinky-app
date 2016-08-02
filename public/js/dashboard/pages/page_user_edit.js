@@ -93,6 +93,12 @@ altair_user_edit = {
     },
     user_languages: function() {
 
+      var languages
+
+      $.getJSON('/languages', function(data) {
+        languages = data
+      })
+
         $('#user_edit_languages').selectize({
             plugins: {
                 'remove_button': {
@@ -100,16 +106,7 @@ altair_user_edit = {
                 }
             },
             placeholder: 'Select language(s)',
-            options: [
-                {id: 1, title: 'English', value: 'gb'},
-                {id: 2, title: 'French', value: 'fr'},
-                {id: 3, title: 'Chinese', value: 'cn'},
-                {id: 4, title: 'Dutch', value: 'nl'},
-                {id: 5, title: 'Italian', value: 'it'},
-                {id: 6, title: 'Spanish', value: 'es'},
-                {id: 7, title: 'German', value: 'de'},
-                {id: 8, title: 'Polish', value: 'pl'}
-            ],
+            options: languages,
             render: {
                 option: function(data, escape) {
                     return  '<div class="option">' +
