@@ -12,6 +12,7 @@ $(function() {
 });
 
 altair_user_edit = {
+
     init: function() {
         // user edit form
         altair_user_edit.edit_form();
@@ -22,63 +23,65 @@ altair_user_edit = {
         // user todo_list
         altair_user_edit.user_todo();
     },
+
+    save(data) {
+        $.ajax({
+            type: 'PUT',
+            url: '/users/javy1103',
+            dataType: 'json',
+            data: data
+        })
+        .done( data => UIkit.notify({ message: data.message, status: 'success' }) )
+        .fail( () => UIkit.notify({ message: "There was a problem while updating your account.", status: 'danger' }) )
+    },
+
     edit_form: function() {
+
+        // form variables
+        var $user_edit_form = $('#user_edit_form'),
+            $user_edit_submit_btn = $('#user_edit_save'),
+            user_edit_name = $('#user_edit_name'),
+            user_edit_email = $('#user_edit_email'),
+            user_edit_active = $('#user_edit_active'),
+            user_edit_username = $('#user_edit_username'),
+            user_edit_password = $('#user_edit_password'),
+            user_edit_password_confirmation = $('#user_edit_password_confirmation'),
+            $user_password_save = $('#user_password_save'),
+            $user_password_form = $('#user_password_form')
+
+
 
         $.ajaxSetup({
             headers: { 'X-CSRF-TOKEN': token = $('[name="_token"]').val() },
         })
 
-        // form variables
-        var $user_edit_form = $('#user_edit_form'),
-        $user_edit_submit_btn = $('#user_edit_save'),
-        user_edit_name = $('#user_edit_name'),
-        user_edit_email = $('#user_edit_email'),
-        user_edit_active = $('#user_edit_active'),
-        user_edit_password = $('#user_edit_password'),
-        user_edit_password_confirmation = $('#user_edit_password_confirmation')
+        user_edit_active.on('change', () => {
+            let data = { isActive: user_edit_active.is(':checked') }
+            this.save(data)
+        })
 
-        user_edit_active.on('change', function(){
-            $.ajax({
-                type: 'PUT',
-                url: '/users/javy1103',
-                dataType: 'json',
-                data: { isActive: user_edit_active.is(':checked') },
-                success: function(data) {
-                    UIkit.notify({
-                        message: data.message,
-                        status: 'success'
-                    });
-                }
-            })
+        // submit form
+        $user_edit_submit_btn.on('click', (e) => {
+            e.preventDefault();
+            let form_serialized = $user_edit_form.serializeObject()
+            this.save(form_serialized)
+        })
+
+        // submit form
+        $user_password_save.on('click', (e) => {
+            e.preventDefault();
+            let form_serialized = $user_password_form.serializeObject()
+            this.save(form_serialized)
         })
 
         // update inputs
         altair_md.update_input(user_edit_name);
-        // update inputs
         altair_md.update_input(user_edit_email);
-        // update inputs
+        altair_md.update_input(user_edit_username);
         altair_md.update_input(user_edit_password);
-        // update inputs
         altair_md.update_input(user_edit_password_confirmation);
-
-        // submit form
-        $user_edit_submit_btn.on('click',function(e) {
-            e.preventDefault();
-            var form_serialized = $user_edit_form.serializeObject()
-            $.ajax({
-                type: 'PUT',
-                url: '/users/javy1103',
-                dataType: 'json',
-                data: form_serialized,
-                success: function(data) {
-                    UIkit.notify({
-                        message: data.message,
-                        status: 'success'
-                    });
-                }
-            })
-        })
     },
+
     user_languages: function(languages) {
 
         $('#user_edit_languages').selectize({

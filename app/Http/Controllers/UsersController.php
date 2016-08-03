@@ -54,18 +54,16 @@ class UsersController extends Controller
      */
     public function update(Request $request)
     {
-        if( isset( $request->isActive ) ) {
-            $this->toggleAcct( $request->isActive );
-        }
-
         $validator = $this->validator( $request->all() );
 
         if ($validator->fails()) {
             return response()->json($validator->messages(), 200);
         }
 
-        Auth::user()->update($request->all());
+        if( isset( $request->isActive ) ) $this->toggleAcct( $request->isActive );
+        else if( isset( $request->password ) ) $this->changePassword( $request->password );
 
+        Auth::user()->update($request->all());
         return response()->json( ['message' => "Account successfully updated."], 200 );
     }
 
@@ -92,15 +90,20 @@ class UsersController extends Controller
             'name' => 'sometimes|required|min:3|max:255',
             'username' => 'sometimes|required|min:6|unique:users,username,'.Auth::user()->id,
             'email' => 'sometimes|required|email|min:3|max:255|unique:users,email,'.Auth::user()->id,
-            'password' => 'sometimes|required|min:6',
+            'password' => 'sometimes|required|confirmed|min:6',
         ]);
     }
 
-    protected function toggleAcct($input) {
+    public function toggleAcct($input) {
         $message = (Auth::user()->toggleAcct($input))
             ? "Account successfully updated."
                 : "There was a problem while updating your account.";
         return response()->json( ['message' => $message], 200);
+    }
+
+    public function changePassword( $args ) {
+        Auth::user()->update([ 'password' => bcrypt($args) ]);
+        return response()->json( ['message' => "Account successfully updated."], 200 );
     }
 
 }

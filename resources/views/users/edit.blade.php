@@ -59,83 +59,43 @@
                                                 General info
                                             </h3>
                                             <div class="uk-grid" data-uk-grid-margin>
-                                                <div class="uk-width-medium-1-2">
+                                                <div class="uk-width-medium-1-3">
                                                     <label for="user_edit_name">Name</label>
                                                     <input class="md-input" type="text" id="user_edit_name" name="name" value="{{ $user->name }}"/>
                                                 </div>
-                                                <div class="uk-width-medium-1-2">
+                                                <div class="uk-width-medium-1-3">
                                                     <label for="user_edit_email">Email</label>
                                                     <input class="md-input" type="email" id="user_edit_email" name="email" value="{{ $user->email }}"/>
                                                 </div>
-                                                <div class="uk-width-medium-1-2">
-                                                    <label for="user_edit_password">New Password</label>
-                                                    <input class="md-input" type="password" id="user_edit_password" name="password"/>
+                                                <div class="uk-width-medium-1-3">
+                                                    <label for="user_edit_password">Username</label>
+                                                    <input class="md-input" type="text" id="user_edit_username" name="username" value="{{ $user->username }}"/>
                                                 </div>
-                                                <div class="uk-width-medium-1-2">
-                                                    <label for="user_edit_password_confirmation">New Password Confirmation</label>
-                                                    <input class="md-input" type="password" id="user_edit_password_confirmation" name="password_confirmation"/>
+                                                <div class="uk-width-medium-1-3 uk-container-center">
+                                                    <span data-uk-modal="{target: '#modal_header_footer'}" class="md-btn md-btn-primary md-btn-block md-btn-wave-light waves-effect waves-button waves-light">Change Password</span>
                                                 </div>
-                                            </div>
-                                            <h3 class="full_width_in_card heading_c">
-                                                Languages
-                                            </h3>
-                                            <div class="uk-grid" data-uk-grid-margin>
-                                                <div class="uk-width-1-1">
-                                                    <select id="user_edit_languages" name="user_edit_languages" multiple>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <h3 class="full_width_in_card heading_c">
-                                                Contact info
-                                            </h3>
-                                            <div class="uk-grid">
-                                                <div class="uk-width-1-1">
-                                                    <div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-2" data-uk-grid-margin>
-                                                        <div>
-                                                            <div class="uk-input-group">
-                                                                <span class="uk-input-group-addon">
-                                                                    <i class="md-list-addon-icon material-icons">&#xE0CD;</i>
-                                                                </span>
-                                                                <label>Phone Number</label>
-                                                                <input type="text" class="md-input" name="user_edit_phone" value="798.981.0388x44933" />
-                                                            </div>
+                                                <div class="uk-modal" id="modal_header_footer">
+                                                    <div class="uk-modal-dialog">
+                                                        <div class="uk-modal-header">
+                                                            <h3 class="uk-modal-title">New Password <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="Please enter a password that is 6 characters minimum">&#xE8FD;</i></h3>
                                                         </div>
-                                                        <div>
-                                                            <div class="uk-input-group">
-                                                                <span class="uk-input-group-addon">
-                                                                    <i class="md-list-addon-icon uk-icon-facebook-official"></i>
-                                                                </span>
-                                                                <label>Facebook</label>
-                                                                <input type="text" class="md-input" name="user_edit_facebook" value="facebook.com/envato" />
+                                                        <form id="user_password_form">
+                                                            <div class="uk-grid">
+                                                                <div class="uk-width-medium-1-1">
+                                                                    <label for="user_edit_password">Password</label>
+                                                                    <input class="md-input" type="password" id="user_edit_password" name="password"/>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="uk-input-group">
-                                                                <span class="uk-input-group-addon">
-                                                                    <i class="md-list-addon-icon uk-icon-twitter"></i>
-                                                                </span>
-                                                                <label>Twitter</label>
-                                                                <input type="text" class="md-input" name="user_edit_twitter" value="twitter.com/envato" />
+                                                            <div class="uk-grid">
+                                                                <div class="uk-width-medium-1-1">
+                                                                    <label for="user_edit_password_confirmation">Password Confirmation</label>
+                                                                    <input class="md-input" type="password" id="user_edit_password_confirmation" name="password_confirmation"/>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="uk-input-group">
-                                                                <span class="uk-input-group-addon">
-                                                                    <i class="md-list-addon-icon uk-icon-linkedin"></i>
-                                                                </span>
-                                                                <label>Linkdin</label>
-                                                                <input type="text" class="md-input" name="user_edit_linkdin" value="linkedin.com/company/envato" />
+                                                            <div class="uk-modal-footer uk-text-right">
+                                                                <button type="button" id="user_password_save" class="md-btn md-btn-flat md-btn-flat-primary uk-modal-close">Save</button><button type="button" class="md-btn md-btn-flat uk-modal-close">Close</button>
                                                             </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="uk-input-group">
-                                                                <span class="uk-input-group-addon">
-                                                                    <i class="md-list-addon-icon uk-icon-google-plus"></i>
-                                                                </span>
-                                                                <label>Google+</label>
-                                                                <input type="text" class="md-input" name="user_edit_google_plus" value="plus.google.com/+envato/about" />
-                                                            </div>
-                                                        </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -153,18 +113,6 @@
                             <div class="uk-form-row">
                                 <input type="checkbox" {{ $user->isActive ? 'checked' : '' }} data-switchery id="user_edit_active" />
                                 <label for="user_edit_active" class="inline-label">User Active</label>
-                            </div>
-                            <hr class="md-hr">
-                            <div class="uk-form-row">
-                                <label class="uk-form-label" for="user_edit_role">User Role</label>
-                                <select data-md-selectize>
-                                    <option value="">Select...</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="super_admin">Super Admin</option>
-                                    <option value="editor" selected>Editor</option>
-                                    <option value="author">Author</option>
-                                    <option value="none">None</option>
-                                </select>
                             </div>
                         </div>
                     </div>
