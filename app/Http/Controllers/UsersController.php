@@ -13,8 +13,6 @@ class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -23,34 +21,24 @@ class UsersController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($username)
     {
         $user = User::whereUsername($username)->with('profile')->firstOrFail();
-        return view('users.show')->with('user', $user);
+        return view('users.show', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function edit($username)
     {
         $user = Auth::user();
-        return view('users.edit')->with('user', $user);
+        return view('users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
@@ -69,9 +57,6 @@ class UsersController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($username)
     {
@@ -80,9 +65,6 @@ class UsersController extends Controller
 
     /**
      * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator($request)
     {

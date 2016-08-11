@@ -9,7 +9,7 @@ use Auth;
 class User extends Authenticatable
 {
 
-    public function toggleAcct($input) {
+    public function toggleAcct(boolean $input) {
         return $this->update(['isActive' => $input]);
     }
 
@@ -20,9 +20,7 @@ class User extends Authenticatable
 
     //Getting editable attributes
     public static function getAttrs() {
-        return [
-            'name', 'username', 'email', 'password'
-        ];
+        return [ 'name', 'username', 'email', 'password' ];
     }
 
     // The attributes that are mass assignable.

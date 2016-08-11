@@ -1,12 +1,8 @@
 @extends('layouts.dashboard')
 
 @section('head')
-    <link rel="stylesheet" href="/css/dashboard/css/style_switcher.min.css" media="all">
     <link rel="stylesheet" href="/css/icons/flags/flags.min.css" media="all">
-    <!-- page specific plugins -->
-    <!-- file input -->
     <script src="/js/dashboard/custom/uikit_fileinput.js"></script>
-
     <!--  user edit functions -->
     <script src="/js/dashboard/pages/page_user_edit.js"></script>
 @endsection
@@ -16,7 +12,7 @@
         <div id="page_content_inner">
             <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-large-7-10">
-                    <form action="" class="uk-form-stacked" id="user_edit_form">
+                    <form action="{{ action('UsersController@update', ['username' => $user->username]) }}" class="uk-form-stacked" id="user_edit_form">
                         {{ csrf_field() }}
                         <div class="md-card">
                             <div class="user_heading" data-uk-sticky="{ top: 48, media: 960 }">
@@ -74,30 +70,6 @@
                                                 <div class="uk-width-medium-1-3 uk-container-center">
                                                     <span data-uk-modal="{target: '#modal_header_footer'}" class="md-btn md-btn-primary md-btn-block md-btn-wave-light waves-effect waves-button waves-light">Change Password</span>
                                                 </div>
-                                                <div class="uk-modal" id="modal_header_footer">
-                                                    <div class="uk-modal-dialog">
-                                                        <div class="uk-modal-header">
-                                                            <h3 class="uk-modal-title">New Password <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="Please enter a password that is 6 characters minimum">&#xE8FD;</i></h3>
-                                                        </div>
-                                                        <form id="user_password_form">
-                                                            <div class="uk-grid">
-                                                                <div class="uk-width-medium-1-1">
-                                                                    <label for="user_edit_password">Password</label>
-                                                                    <input class="md-input" type="password" id="user_edit_password" name="password"/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="uk-grid">
-                                                                <div class="uk-width-medium-1-1">
-                                                                    <label for="user_edit_password_confirmation">Password Confirmation</label>
-                                                                    <input class="md-input" type="password" id="user_edit_password_confirmation" name="password_confirmation"/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="uk-modal-footer uk-text-right">
-                                                                <button type="button" id="user_password_save" class="md-btn md-btn-flat md-btn-flat-primary uk-modal-close">Save</button><button type="button" class="md-btn md-btn-flat uk-modal-close">Close</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </li>
@@ -105,6 +77,30 @@
                             </div>
                         </div>
                     </form>
+                </div>
+                <div class="uk-modal" id="modal_header_footer">
+                    <div class="uk-modal-dialog">
+                        <div class="uk-modal-header">
+                            <h3 class="uk-modal-title">New Password <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="Please enter a password that is 6 characters minimum">&#xE8FD;</i></h3>
+                        </div>
+                        <form action="{{ action('UsersController@update', ['username' => $user->username]) }}" id="user_password_form">
+                            <div class="uk-grid">
+                                <div class="uk-width-medium-1-1">
+                                    <label for="user_edit_password">Password</label>
+                                    <input class="md-input" type="password" id="user_edit_password" name="password"/>
+                                </div>
+                            </div>
+                            <div class="uk-grid">
+                                <div class="uk-width-medium-1-1">
+                                    <label for="user_edit_password_confirmation">Password Confirmation</label>
+                                    <input class="md-input" type="password" id="user_edit_password_confirmation" name="password_confirmation"/>
+                                </div>
+                            </div>
+                            <div class="uk-modal-footer uk-text-right">
+                                <button type="button" id="user_password_save" class="md-btn md-btn-flat md-btn-flat-primary uk-modal-close">Save</button><button type="button" class="md-btn md-btn-flat uk-modal-close">Close</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="uk-width-large-3-10">
                     <div class="md-card">
