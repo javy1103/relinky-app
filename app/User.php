@@ -3,13 +3,12 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Auth;
 
 class User extends Authenticatable
 {
 
-    public function toggleAcct(boolean $input) {
+    public function toggleAcct($input) {
         return $this->update(['isActive' => $input]);
     }
 

@@ -35,7 +35,7 @@
                         </ul>
                     </div>
                     @if( $user->isCurrentUser() )
-                        <a class="md-fab md-fab-small md-fab-accent" href="{{action('UsersController@edit', ['username' => Auth::user()->username ])}}">
+                        <a class="md-fab md-fab-small md-fab-accent" href="{{route('users.edit', ['username' => Auth::user()->username ])}}">
                             <i class="material-icons">&#xE150;</i>
                         </a>
                     @endif
