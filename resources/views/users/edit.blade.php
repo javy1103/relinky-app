@@ -54,7 +54,7 @@
                                             Name here!!!
                                         </h3>
                                         <div class="uk-grid" data-uk-grid-margin>
-                                            @each('shared.util.form_attrs', $user->profile->getAttrs(), 'attr')
+
                                         </div>
                                         <h3 class="full_width_in_card heading_c">
                                             Languages

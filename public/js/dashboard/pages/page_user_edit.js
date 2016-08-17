@@ -56,7 +56,7 @@ altair_user_edit = {
         })
 
         user_edit_active.on('change', () => {
-            let data = { isActive: user_edit_active.is(':checked') }
+            let data = { isActive: Boolean(user_edit_active.is(':checked')) }
             this.save(data)
         })
 
