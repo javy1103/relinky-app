@@ -9,9 +9,8 @@ class UpdateUsersRequest extends Request
 {
 
     // Get data to be validated from the request.
-    protected function validationData()
-    {
-        return $this->has('isActive') ? Boolean($this->only('isActive')) : $this->all();
+    protected function validationData() {
+        return $this->has('isActive') ? ["isActive" => ($this->only('isActive') == "true")] : $this->all();
     }
 
     /**
@@ -19,8 +18,7 @@ class UpdateUsersRequest extends Request
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 

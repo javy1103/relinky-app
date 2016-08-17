@@ -27,7 +27,7 @@ altair_user_edit = {
     save( data, url ) {
         $.ajax({
             type: 'PUT',
-            url: '/users/javy1103',
+            url: url,
             dataType: 'json',
             data: data
         })
@@ -56,8 +56,9 @@ altair_user_edit = {
         })
 
         user_edit_active.on('change', () => {
-            let data = { isActive: Boolean(user_edit_active.is(':checked')) }
-            this.save(data)
+            let data = { isActive: Boolean(user_edit_active.is(':checked')) },
+                url = $user_edit_form.attr('action')
+            this.save(data, url)
         })
 
         // submit form
@@ -71,8 +72,9 @@ altair_user_edit = {
         // submit form
         $user_password_save.on('click', (e) => {
             e.preventDefault();
-            let form_serialized = $user_password_form.serializeObject()
-            this.save(form_serialized)
+            let form_serialized = $user_password_form.serializeObject(),
+                url = $user_password_form.attr('action')
+            this.save(form_serialized, url)
         })
 
         // update inputs

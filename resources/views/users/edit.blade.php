@@ -54,7 +54,12 @@
                                             Name here!!!
                                         </h3>
                                         <div class="uk-grid" data-uk-grid-margin>
-
+                                            <div class="uk-width-medium-1-1">
+                                                <div class="uk-form-row">
+                                                    <label>Bio</label>
+                                                    <textarea cols="30" class="md-input">{{ $user->profile->bio }}</textarea>
+                                                </div>
+                                            </div>
                                         </div>
                                         <h3 class="full_width_in_card heading_c">
                                             Languages

@@ -8,6 +8,9 @@ use Auth;
 class User extends Authenticatable
 {
 
+    //load profile realtion
+    protected $with = ['profile'];
+
     public function toggleAcct($input) {
         return $this->update(['isActive' => $input]);
     }

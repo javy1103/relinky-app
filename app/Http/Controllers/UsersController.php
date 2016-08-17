@@ -26,15 +26,15 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($username) {
-        $user = User::whereUsername($username)->with('profile')->firstOrFail();
+    public function show( $username ) {
+        $user = User::whereUsername( $username )->with('profile')->firstOrFail();
         return view('users.show', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($username) {
+    public function edit( $username ) {
         $user = Auth::user();
         return view('users.edit', compact('user'));
     }
@@ -42,8 +42,9 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUsersRequest $request) {
+    public function update( UpdateUsersRequest $request ) {
 
+        if( $request->has('password') ) $this->changePassword( $request->password );
 
         Auth::user()->update($request->all());
         return response()->json( ['message' => "Account successfully updated."], 200 );
@@ -56,15 +57,9 @@ class UsersController extends Controller
         //
     }
 
-    public function toggleAcct( $input ) {
-        $message = (Auth::user()->toggleAcct($input))
-            ? "Account successfully updated."
-                : "There was a problem while updating your account.";
-        return response()->json( ['message' => $message], 200);
-    }
+    public function changePassword( $password ) {
 
-    public function changePassword( $args ) {
-        Auth::user()->update([ 'password' => bcrypt($args) ]);
+        Auth::user()->update([ 'password' => bcrypt( $password ) ]);
         return response()->json( ['message' => "Account successfully updated."], 200 );
     }
 
