@@ -29,7 +29,7 @@
         <div class="uk-margin-top">
             <a href="#" id="login_help_show" class="uk-float-right">Need help?</a>
             <span class="icheck-inline">
-                <input type="checkbox" name="login_page_stay_signed" id="login_page_stay_signed" data-md-icheck />
+                <input type="checkbox" name="remember" id="login_page_stay_signed" data-md-icheck />
                 <label for="login_page_stay_signed" class="inline-label">Stay signed in</label>
             </span>
         </div>

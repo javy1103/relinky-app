@@ -15,10 +15,11 @@ Route::get('/', function () {
     return view('pages.welcome');
 });
 
-Route::auth();
+Auth::routes();
+Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::get('/dashboard', 'UsersController@dashboard');
-
+Route::post('/users/{username}', 'UsersController@uploadFile');
 Route::resource('users', 'UsersController', ['except' => [ 'create', 'store' ], 'parameters' => [ 'users' => 'username' ]]);
 
 Route::get('/languages', function(App\Language $language) {

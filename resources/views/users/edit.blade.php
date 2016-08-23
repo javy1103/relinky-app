@@ -16,8 +16,9 @@
                         <div class="user_heading" data-uk-sticky="{ top: 48, media: 960 }">
                             <div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
                                 <div class="fileinput-new thumbnail">
-                                    <img src="assets/img/avatars/user.png" alt="user avatar"/>
+                                    <img id="profile-image" src="assets/img/avatars/user.png" alt="user avatar"/>
                                 </div>
+
                                 <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                 <div class="user_avatar_controls">
                                     <span class="btn-file">
@@ -25,7 +26,7 @@
                                         <span class="fileinput-exists"><i class="material-icons">&#xE86A;</i></span>
                                         <input type="file" name="user_edit_avatar_control" id="user_edit_avatar_control">
                                     </span>
-                                    <a href="#" class="btn-file fileinput-exists" data-dismiss="fileinput"><i class="material-icons">&#xE5CD;</i></a>
+                                    <a href="#" class="btn-file fileinput-exists" data-dismiss="dfileinput"><i class="material-icons">&#xE5CD;</i></a>
                                 </div>
                             </div>
                             <div class="user_heading_content">
@@ -43,12 +44,16 @@
                             </div>
                         </div>
                         <div class="user_content">
+                            <span class="upload-file">Upload</span>
                             <ul id="user_edit_tabs" class="uk-tab" data-uk-tab="{connect:'#user_edit_tabs_content'}">
                                 <li class="uk-active"><a href="#">Edit Profile</a></li>
                                 <li><a href="#">Account Settings</a></li>
                             </ul>
                             <ul id="user_edit_tabs_content" class="uk-switcher uk-margin">
-                                <li>
+                                <li class="form-container">
+                                    <form class="" action="index.html" method="post">
+
+                                    </form>
                                     <div class="uk-margin-top">
                                         <h3 class="full_width_in_card heading_c">
                                             Name here!!!
@@ -138,7 +143,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li>
+                                <li class="form-container">
                                     <form action="{{ action('UsersController@update', ['username' => $user->username]) }}" class="uk-form-stacked" id="user_edit_form">
                                         {{ csrf_field() }}
                                         <div class="uk-margin-top">

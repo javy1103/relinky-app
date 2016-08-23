@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateUsersRequest;
+use Illuminate\Http\Request;
 use App\User;
 use Auth;
 use Validator;
+use Storage;
 
 class UsersController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth', ['except' => ['show', 'index']]);
+    }
 
     // Show users dashboard
     public function dashboard() {
@@ -63,4 +69,14 @@ class UsersController extends Controller
         return response()->json( ['message' => "Account successfully updated."], 200 );
     }
 
+    public function uploadFile( Request $request )
+    {
+        $file = $request->file('image');
+
+        // $userId = Auth::user()->id;
+        // $filePath = "{$userId}/{$file->hashName()}";
+        // $url = Storage::disk('s3')->put( $filePath, file_get_contents($file) );
+        $file->storeAs( auth()->id(), 'profile', '','s3' );
+        return response()->json( [ 'url' => $url ], 200 );
+    }
 }

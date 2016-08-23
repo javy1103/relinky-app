@@ -149,10 +149,10 @@
         this.$element.find('.fileinput-filename').text('');
 
         if (this.original.exists) {
-            this.$element.addClass('fileinput-exists').removeClass('fileinput-new')    
+            this.$element.addClass('fileinput-exists').removeClass('fileinput-new')
         } else {
-            this.$element.addClass('fileinput-new').removeClass('fileinput-exists')  
-        } 
+            this.$element.addClass('fileinput-new').removeClass('fileinput-exists')
+        }
 
         this.$element.trigger('reset.uk.fileinput')
     };

@@ -55,11 +55,13 @@ return [
         ],
 
         's3' => [
-            'driver' => 's3',
-            'key' => 'your-key',
-            'secret' => 'your-secret',
-            'region' => 'your-region',
-            'bucket' => 'your-bucket',
+            'driver' => env('STORAGE_DRIVER'),
+            'key' => env('STORAGE_KEY'),
+            'secret' => env('STORAGE_SECRET'),
+            'region' => env('STORAGE_REGION'),
+            'bucket' => env('STORAGE_BUCKET'),
+            'credentials' => [ env('STORAGE_KEY'), env('STORAGE_SECRET') ],
+            'visibility' => 'public'
         ],
 
     ],

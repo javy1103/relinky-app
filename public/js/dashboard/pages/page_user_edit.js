@@ -47,7 +47,9 @@ altair_user_edit = {
             user_edit_password = $('#user_edit_password'),
             user_edit_password_confirmation = $('#user_edit_password_confirmation'),
             $user_password_save = $('#user_password_save'),
-            $user_password_form = $('#user_password_form')
+            $user_password_form = $('#user_password_form'),
+            uploadFile = $(".upload-file")
+
 
 
 
@@ -64,8 +66,10 @@ altair_user_edit = {
         // submit form
         $user_edit_submit_btn.on('click', (e) => {
             e.preventDefault();
-            let form_serialized = $user_edit_form.serializeObject(),
-                url = $user_edit_form.attr('action')
+
+            let submit_form = $(".form-container.uk-active form"),
+                form_serialized = submit_form.serializeObject(),
+                url = submit_form.attr('action')
             this.save(form_serialized, url)
         })
 
@@ -77,12 +81,26 @@ altair_user_edit = {
             this.save(form_serialized, url)
         })
 
-        // update inputs
-        altair_md.update_input(user_edit_name);
-        altair_md.update_input(user_edit_email);
-        altair_md.update_input(user_edit_username);
-        altair_md.update_input(user_edit_password);
-        altair_md.update_input(user_edit_password_confirmation);
+        uploadFile.on('click', (e) => {
+            e.preventDefault();
+            let data = new FormData(),
+                file = $('#user_edit_avatar_control').prop('files')[0]
+
+            data.append('image', file)
+
+            $.ajax({
+                url: '/users/javy1103',
+                type: 'POST',
+                data: data,
+                dataType: 'JSON',
+                contentType: false,
+                processData: false,
+            })
+            .done( response => {
+                $('#profile-image').attr('src', response.url)
+            })
+
+        })
     },
 
     user_languages: function(languages) {
