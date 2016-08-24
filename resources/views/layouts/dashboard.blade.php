@@ -193,10 +193,10 @@
                             </div>
                         </li>
                         <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
-                            <a href="#" class="user_action_image"><img class="md-user-image" src="img/avatars/avatar_11_tn.png" alt=""/></a>
+                            <a href="#" class="user_action_image"><img class="md-user-image" src="{{ Storage::disk('s3')->url($user->profile->profile_img) }}" alt=""/></a>
                             <div class="uk-dropdown uk-dropdown-small">
                                 <ul class="uk-nav js-uk-prevent">
-                                    <li><a href="{{ route('users.show', [ 'username' => Auth::user()->username ]) }}">My profile</a></li>
+                                    <li><a href="{{ route('users.show', [ 'user' => Auth::user() ]) }}">My profile</a></li>
                                     <li><a href="page_settings.html">Settings</a></li>
                                     <li><a href="{{ url('/logout') }}">Logout</a></li>
                                 </ul>

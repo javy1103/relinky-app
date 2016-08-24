@@ -97,7 +97,7 @@ altair_user_edit = {
                 processData: false,
             })
             .done( response => {
-                $('#profile-image').attr('src', response.url)
+                console.log(response);
             })
 
         })

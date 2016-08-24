@@ -32,7 +32,8 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show( $username ) {
+    public function show( User $user ) {
+        dd($user->id);
         $user = User::whereUsername( $username )->with('profile')->firstOrFail();
         return view('users.show', compact('user'));
     }
@@ -71,12 +72,11 @@ class UsersController extends Controller
 
     public function uploadFile( Request $request )
     {
+        $user = Auth::user();
         $file = $request->file('image');
+        $path = $file->storeAs("images/{$user->id}", "profile.{$file->extension()}", 's3');
+        $user->profile->update( ['profile_img' => $path] );
 
-        // $userId = Auth::user()->id;
-        // $filePath = "{$userId}/{$file->hashName()}";
-        // $url = Storage::disk('s3')->put( $filePath, file_get_contents($file) );
-        $file->storeAs( auth()->id(), 'profile', '','s3' );
-        return response()->json( [ 'url' => $url ], 200 );
+        return response()->json( [ 'url' => 'Updated' ], 200 );
     }
 }

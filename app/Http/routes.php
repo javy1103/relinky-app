@@ -20,7 +20,9 @@ Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::get('/dashboard', 'UsersController@dashboard');
 Route::post('/users/{username}', 'UsersController@uploadFile');
-Route::resource('users', 'UsersController', ['except' => [ 'create', 'store' ], 'parameters' => [ 'users' => 'username' ]]);
+
+// Route::model('users', 'App\User');
+Route::resource('users', 'UsersController', ['except' => [ 'create', 'store' ]]);
 
 Route::get('/languages', function(App\Language $language) {
   return response($language->all()->toJson(), 200);

@@ -8,6 +8,10 @@ use Auth;
 class User extends Authenticatable
 {
 
+    public function getRouteKeyName() {
+        return 'username';
+    }
+
     //load profile realtion
     protected $with = ['profile'];
 

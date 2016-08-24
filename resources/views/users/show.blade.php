@@ -17,7 +17,7 @@
                     </div>
                     <div class="user_heading_avatar">
                         <div class="thumbnail">
-                            <img src="assets/img/avatars/avatar_11.png" alt="user avatar"/>
+                            <img src="{{ Storage::disk('s3')->url( $user->profile->profile_img ) }}" alt="user avatar"/>
                         </div>
                     </div>
                     <div class="user_heading_content">
